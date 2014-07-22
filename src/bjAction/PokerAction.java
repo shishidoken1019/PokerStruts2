@@ -62,20 +62,24 @@ public class PokerAction extends AbstractAction implements ModelDriven<PokerMode
 		this.session_put_common(now_use_tramp, parent, player);
 
 		// 表示側に渡す情報をセット
-		this.common_disp(cardArray, parent, player);
+		this.common_disp(parent, player);
+		
+		////
+		////
+		pokerModel.addValues("aaa");
+		pokerModel.addValues("bbb");
+		pokerModel.addValues("ccc");
+		
 
 		// 画面を表示
 		return "success";
 	}
 
 	/**
-	 * ヒットを押されたときに実行
+	 * 	チェンジを押されたときに実行
 	 * @return 遷移先
 	 */
-	public String hit() {
-
-		//
-		Card card = new Card();
+	public String change() {
 
 		// ゲームをリロードしようとしたらエラー
 		if (sessionMap.get("parent") == null) {
@@ -83,29 +87,23 @@ public class PokerAction extends AbstractAction implements ModelDriven<PokerMode
 			return "errorPage";
 		}
 
+		System.out.println("aaaaaa");
+		System.out.println(pokerModel.getCheckboxField3()[0]);
+		System.out.println(pokerModel.getCheckboxField3()[1]);
+		System.out.println(pokerModel.getCheckboxField3()[2]);
 		// セッション情報からインスタンスを取得
 		Player player = (Player) sessionMap.get("player");
 		Player parent = (Player) sessionMap.get("parent");
-		ArrayList<String> now_use_tramp = (ArrayList<String>) sessionMap
-				.get("now_use_tramp");
-		String game_name = (String) sessionMap.get("game_name");
+		ArrayList<Card> now_use_tramp = (ArrayList<Card>) sessionMap.get("now_use_tramp");
 
 		// 親が行動
-		now_use_tramp = parent.parent_act(now_use_tramp);
-		// ヒットしたのでプレイヤーは手札にカードを追加
-		now_use_tramp = player.hit(now_use_tramp);
 
 		// セッションに情報を格納
 		this.session_put_common(now_use_tramp, parent, player);
-
-		// もしプレイヤーのカードが21を超えていたら勝負
-		if (player.getPlayer_sum_card() > 21) {
-			//
-			this.fight(player, parent);
-		}
+		
 
 		// 共通部分を表示側に渡す
-		this.common_disp(card, parent, player);
+		this.common_disp( parent, player);
 
 		return "success";
 
@@ -153,6 +151,12 @@ public class PokerAction extends AbstractAction implements ModelDriven<PokerMode
 		//
 		return "success";
 	}
+	
+	public String battle(){
+		
+		//
+		
+	}
 
 	/**
 	 * 共通でセッションに情報を格納するもの
@@ -172,9 +176,9 @@ public class PokerAction extends AbstractAction implements ModelDriven<PokerMode
 	 * @param parent
 	 * @param player
 	 */
-	public void common_disp(CardArray card,Player parent, Player player) {
+	public void common_disp(Player parent, Player player) {
 		// 表示側に渡す
-		System.out.println(parent.getPlayer_card());
+		CardArray card = new CardArray();
 		pokerModel.setParent_card(card.display_card(parent.getPlayer_card()));
 		pokerModel.setPlayer_card(card.display_card(player.getPlayer_card()));
 

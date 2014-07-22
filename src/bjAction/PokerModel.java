@@ -24,8 +24,15 @@ public class PokerModel {
 	 * プレイヤーのカードの合計
 	 */
 	private int player_point = 0;
+	/**
+	 * チェックボックスの値
+	 */
+	private String checkboxField1;
 	
 	
+	
+	
+	private ArrayList<String> values = new ArrayList<String>();
 	/**
 	 * @return parent_card
 	 */
@@ -86,7 +93,54 @@ public class PokerModel {
 	public void setPlayer_point(int player_point) {
 		this.player_point = player_point;
 	}
+	/**
+	 * @return values
+	 */
+	public ArrayList<String> getValues() {
+		return values;
+	}
+	/**
+	 * @param values セットする values
+	 */
+	public void setValues(ArrayList<String> values) {
+		this.values = values;
+	}
 
+	public void addValues(String aaa) {
+		this.values.add(aaa);
+	}
+	/**
+	 * @return checkboxField1
+	 */
+	public String getCheckboxField1() {
+		return checkboxField1;
+	}
+	/**
+	 * @param checkboxField1 セットする checkboxField1
+	 */
+	public void setCheckboxField1(String checkboxField1) {
+		this.checkboxField1 = checkboxField1;
+	}
+
+	
+	
+	/**
+	 * 
+	 */
+	private String[] checkboxField3;
+	/**
+	 * @return checkboxField3
+	 */
+	public String[] getCheckboxField3() {
+		return checkboxField3;
+	}
+	/**
+	 * @param checkboxField3 セットする checkboxField3
+	 */
+	public void setCheckboxField3(String[] checkboxField3) {
+		this.checkboxField3 = checkboxField3;
+	}
+	
 	
 
 }

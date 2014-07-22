@@ -15,6 +15,8 @@ li {
 </head>
 <body>
 	<h1>ポーカー</h1>
+	<s:form name="form1">	
+	
 	<h2>親の手札</h2>
 	<ul>
 		<s:iterator value="parent_card" status="rowstatus">
@@ -26,20 +28,29 @@ li {
 				</s:else>
 		</s:iterator>
 	</ul>
-
+	
 	<h2>自分の手札</h2>
 	<ul>
 		<s:iterator value="player_card" status="rowstatus">
-			<li><s:property value="player_card.get(#rowstatus.index)" /></li>
+  			<li><s:property value="player_card.get(#rowstatus.index)" /></li>
 		</s:iterator>
+
 	</ul>
-	<s:form name="form1">
+	<ul>
+		<s:iterator value="player_card" status="rowstatus">
+ 			<li><s:checkbox name="checkboxField3" value="aaa" fieldValue="%{player_card.get(#rowstatus.index)}" /></li>
+		</s:iterator>
+
+	</ul>
 		<s:if test="result.length() == 0">
 			<p>
-				<s:submit method="hit" value="ヒット" />
+				<s:submit method="change" value="チェンジ" />
 			</p>
 			<p>
-				<s:submit method="stand" value="スタンド" />
+				<s:submit method="stay" value="ステイ" />
+			</p>
+			<p>
+				<s:submit method="battle" value="勝負" />
 			</p>
 		</s:if>
 	</s:form>

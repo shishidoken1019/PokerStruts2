@@ -11,7 +11,8 @@ import bjAction.AbstractAction;
 @Results({
 		@Result(name = "loginTop", value = "login.action", type = ServletRedirectResult.class),
 		@Result(name = "blackJack", value = "blackJack.action", type = ServletRedirectResult.class),
-		@Result(name = "poker", value = "poker.action", type = ServletRedirectResult.class) })
+		@Result(name = "poker", value = "poker.action", type = ServletRedirectResult.class),
+		@Result(name = "errorPage", value = "errorPage.action", type = ServletRedirectResult.class) })
 
 public class IndexAction extends AbstractAction {
 
@@ -32,12 +33,23 @@ public class IndexAction extends AbstractAction {
 
 	// ブラックジャックを押されたら
 	public String blackJack() throws Exception {
-
+		
+		// なにかしらの理由でセッションがプレイヤーのセッションが切れていたら
+		if (sessionMap.get("player") == null) {
+			// エラーページに飛ぶ
+			return "errorPage";
+		}
+		
 		return "blackJack";
 	}
 
 	// ポーカーを押されたら
 	public String poker() throws Exception {
+		// なにかしらの理由でセッションがプレイヤーのセッションが切れていたら
+		if (sessionMap.get("player") == null) {
+			// エラーページに飛ぶ
+			return "errorPage";
+		}
 
 		return "poker";
 	}

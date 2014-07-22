@@ -15,9 +15,9 @@ public class Card {
 	/**
 	 * カードの（マークと数字）情報
 	 */
-	String card_all_info;
-	String card_mark;
-	int card_number;
+	private String card_all_info;
+	private String card_mark;
+	private int card_number;
 	
 	public Card(String card_all_info){
 		this.card_all_info = card_all_info;
